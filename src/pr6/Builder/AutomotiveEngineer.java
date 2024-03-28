@@ -7,7 +7,7 @@ public class AutomotiveEngineer {
         super();
         this.builder = builder;
         if (this.builder == null) {
-            throw new IllegalArgumentException("Automotive Engineer can't work without Car Builder!");
+            throw new IllegalArgumentException("Инженер-автомобилестроитель не может работать без автопроизводителя!");
         }
     }
 

@@ -13,29 +13,29 @@ public class ClassicCarBuilder implements CarBuilder {
 
     @Override
     public CarBuilder fixChassis() {
-        System.out.println("Assembling chassis of the classical model");
-        this.chassis = "Classic Chassis";
+        System.out.println("Собираю шасси классической модели");
+        this.chassis = "Классическое шасси";
         return this;
     }
 
     @Override
     public CarBuilder fixBody() {
-        System.out.println("Assembling body of the classical model");
-        this.body = "Classic Body";
+        System.out.println("Собираю кузов классической модели");
+        this.body = "Классический кузов";
         return this;
     }
 
     @Override
     public CarBuilder paint() {
-        System.out.println("Painting body of the classical model");
-        this.paint = "Classic White Paint";
+        System.out.println("Окрашиваю кузов классической модели");
+        this.paint = "Классический белый окрас";
         return this;
     }
 
     @Override
     public CarBuilder fixInterior() {
-        System.out.println("Setting up interior of the classical model");
-        this.interior = "Classic interior";
+        System.out.println("Создаю интерьер классической модели");
+        this.interior = "Классический интерьер";
         return this;
     }
 
@@ -45,7 +45,7 @@ public class ClassicCarBuilder implements CarBuilder {
         if (car.doQualityCheck()) {
             return car;
         } else {
-            System.out.println("Car assembly is incomplete. Can't deliver!");
+            System.out.println("Сборка машины еще не завершена.");
         }
         return null;
     }

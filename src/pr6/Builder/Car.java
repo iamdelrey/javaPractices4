@@ -61,7 +61,7 @@ public class Car {
     public String toString() {
         // StringBuilder class also uses Builder Design Pattern with implementation of java.lang.Appendable interface
         StringBuilder builder = new StringBuilder();
-        builder.append("Car [chassis=").append(chassis).append(", body=").append(body).append(", paint=").append(paint);
+        builder.append("Машина [шасси=").append(chassis).append(", кузов=").append(body).append(", окрас=").append(paint);
         return builder.toString();
     }
 
