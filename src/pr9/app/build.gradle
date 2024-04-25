@@ -1,0 +1,31 @@
+apply plugin: 'java'
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'App'
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+task copyJar(type: Copy) {
+    dependsOn jar
+    from('build/libs/app.jar')
+    into('docker')
+}
+
+task buildDocker(type: Exec) {
+    dependsOn copyJar
+    commandLine 'docker', 'build', '-t', 'app-image', './docker'
+}
+
+task runDockerContainer(type: Exec) {
+    dependsOn buildDocker
+    commandLine 'docker', 'run', '--name', 'app-container', 'app-image'
+}
+
+task dockerize {
+    dependsOn runDockerContainer
+}
