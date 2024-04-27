@@ -1,0 +1,49 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'com.example'
+version '1.0-SNAPSHOT'
+sourceCompatibility = '17'
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.12'
+}
+
+mainClassName = 'com.example.App'
+
+task createJar(type: Jar) {
+    archiveFileName = "myapp.jar"
+    destinationDir = file("$buildDir/jars")
+    from sourceSets.main.output
+}
+
+task buildDocker(type: Exec) {
+    commandLine 'docker', 'build', '-t', 'myapp', '.'
+    workingDir = file("$buildDir/docker")
+}
+
+task runDocker(type: Exec) {
+    dependsOn buildDocker
+    commandLine 'docker', 'run', '--rm', 'myapp'
+}
+
+buildDocker.dependsOn createJar
+
+// Проверяем, установлен ли JDK, и используем его, если да
+def javaHome = System.getenv("JAVA_HOME")
+if (javaHome != null) {
+    println("Using JDK from JAVA_HOME: $javaHome")
+    toolChains {
+        jdk(JavaInstallation) {
+            // Указываем путь к JDK
+            homeDir = file(javaHome)
+        }
+    }
+}
